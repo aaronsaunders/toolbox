@@ -7,6 +7,11 @@ import sys
 from Bio import Entrez
 from  Bio.Blast  import  NCBIWWW
 from  Bio.Blast  import  NCBIXML
+import re
+from Bio import SeqIO
+
+
+Entrez.email = 'ams@bio.aau.dk'
 
 
 """
