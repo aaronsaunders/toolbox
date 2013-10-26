@@ -93,12 +93,4 @@ def  efetch_nt_gb(acc, start, stop, strand):
   
   return  record
   
-def ncbi_blast_fastafile(filehandle):
-    """ """
-    records  =  SeqIO.parse(filehandle,  format="fasta")
-    blast_records = []
 
-    for record in records:
-        result_handle  =  NCBIWWW.qblast('blastn', 'nr', record.format('fasta'))
-        blast_records.append(NCBIXML.read(result_handle))
-   
