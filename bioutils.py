@@ -57,30 +57,5 @@ def regex_from_string(seq):
     return ''.join([ bases[character] for character in seq ])
 
 
-   
-def get_sizes(fname, sub=False):
-    """
-    Parses a sequence file and returns a list of sequence lengths
-    """
-    from Bio import SeqIO
-    from toolbox import biofileformat
-    
-    with biofileformat.FileType('rb')(fname) as fh:
-        seqformat = biofileformat.from_handle(fh)
-          
-        okformats = [ "fasta", "fastq" ]
-        if seqformat not in okformats:
-            print "takes only fasta/fastq w/wo compression"
-            return
-        
-        if sub:
-            sizes = []
-            for n, rec in enumerate(SeqIO.parse(fh, seqformat)):
-                sizes.append(len(rec))
-                if n == (sub - 1):
-                    break
-        else:
-            sizes = [len(rec) for rec in SeqIO.parse(fh, seqformat)]
-    
-    return sizes
+
 
