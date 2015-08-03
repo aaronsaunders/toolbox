@@ -83,22 +83,22 @@ def  efetch_nt(acc, start=None, stop=None, strand=None):
                             retmode='gbwithparts')
     record = SeqIO.read(handle, 'genbank')
 
-  return  record
+    return  record
 
 def  efetch_protein(acc, start=None, stop=None, strand=None):
-  """Wrapper for Bio.efetch.
+    """Wrapper for Bio.efetch.
 
-  Takes protein acc, (opt: start, stop, strand)
-  returns BioPython SeqRecord from protein
+    Takes protein acc, (opt: start, stop, strand)
+    returns BioPython SeqRecord from protein
 
-  Strand: PLUS = 1, MINUS = -1
-  """
+    Strand: PLUS = 1, MINUS = -1
+    """
 
-  if strand == 'PLUS':
-      strand = 1
-  if strand == 'MINUS':
-      strand = -1
-  handle = Entrez.efetch(db='protein',
+    if strand == 'PLUS':
+        strand = 1
+    if strand == 'MINUS':
+        strand = -1
+    handle = Entrez.efetch(db='protein',
                         id=acc,
                         seq_start=start,
                         seq_stop=stop,
