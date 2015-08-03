@@ -66,31 +66,48 @@ def parse_cds(record):
 
       return cds_acc, cds_start, cds_stop, cds_strand
 
+def  efetch_nt(acc, start=None, stop=None, strand=None):
+    """Wrapper for Bio.efetch.
 
-def  efetch_nt_fasta(acc, start, stop, strand):
-""" wrapper for Bio.efetch"""
-  
+    Takes nt acc, (opt: start, stop, strand)
+    returns BioPython SeqRecord from nucleotide
+
+    Strand: PLUS = 1, MINUS = -1
+    """
+
     if strand == 'PLUS':
         strand = 1
     if strand == 'MINUS':
         strand = -1
-    handle = Entrez.efetch(db='nuccore', id=acc, seq_start=start,
-            seq_stop=stop, strand=strand, retmode='fasta')
-    record = SeqIO.read(handle, 'fasta')
-    
-    return  record
+    handle = Entrez.efetch(db='nuccore',
+                            id=acc,
+                            seq_start=start,
+                            seq_stop=stop,
+                            strand=strand,
+                            retmode='gbwithparts')
+    record = SeqIO.read(handle, 'genbank')
 
-def  efetch_nt_gb(acc, start, stop, strand):
-""" wrapper for Bio.efetch"""
-    
-    if strand == 'PLUS':
-        strand = 1
-    if strand == 'MINUS':
-        strand = -1
-    handle = Entrez.efetch(db='nuccore', id=acc, seq_start=start,
-            seq_stop=stop, strand=strand, retmode='gbwithparts')
-    record = SeqIO.read(handle, 'genbank')  
-  
   return  record
-  
 
+def  efetch_protein(acc, start=None, stop=None, strand=None):
+  """Wrapper for Bio.efetch.
+
+  Takes protein acc, (opt: start, stop, strand)
+  returns BioPython SeqRecord from protein
+
+  Strand: PLUS = 1, MINUS = -1
+  """
+
+  if strand == 'PLUS':
+      strand = 1
+  if strand == 'MINUS':
+      strand = -1
+  handle = Entrez.efetch(db='protein',
+                        id=acc,
+                        seq_start=start,
+                        seq_stop=stop,
+                        strand=strand,
+                        retmode='gbwithparts')
+    record = SeqIO.read(handle, 'genbank')
+
+    return  record
