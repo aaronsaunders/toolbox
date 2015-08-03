@@ -6,6 +6,7 @@ from Bio.SeqIO.QualityIO import FastqGeneralIterator
 
 def count_fastq(fh):
     counts = Counter()
+    n = 0
     for n, data in enumerate(FastqGeneralIterator(fh)):
         seq = data[2]
         counts[seq] += 1
