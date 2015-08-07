@@ -48,14 +48,25 @@ RNA_codon_table = {
 def regex_from_string(seq):
     '''Makes an IUPAC DNA sequence string into a regular expression'''
     bases = { 'A' : 'A', 'T': 'T', 'G': 'G', 'C': 'C',
-	      'R' : '[AG]', 'Y': '[CT]', 'S': '[GC]', 
+	      'R' : '[AG]', 'Y': '[CT]', 'S': '[GC]',
 	      'W' : '[AT]', 'K': '[GT]', 'M': '[AC]',
 	      'B': '[CGT]', 'D': '[AGT]', 'H': '[ACT]',
 	      'V': '[ACG]', 'N': '[AGCT]'}
-    seq = seq .upper()
-  
+    seq = seq.upper()
+
     return ''.join([ bases[character] for character in seq ])
 
+def regex_to_string(seq):
+    '''Makes an IUPAC DNA sequence string into a regular expression'''
+    bases = { 'A' : 'A', 'T': 'T', 'G': 'G', 'C': 'C',
+	      'R' : '[AG]', 'Y': '[CT]', 'S': '[GC]',
+	      'W' : '[AT]', 'K': '[GT]', 'M': '[AC]',
+	      'B': '[CGT]', 'D': '[AGT]', 'H': '[ACT]',
+	      'V': '[ACG]', 'N': '[AGCT]'}
+    seq = seq.upper()
+
+    for match in matches:
+        ''.join(sorted(match)[:-2])
 
 
-
+    return ''.join([ bases[character] for character in seq ])
