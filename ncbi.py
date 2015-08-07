@@ -80,7 +80,12 @@ def  efetch_nt(acc, start=None, stop=None, strand=None):
                             seq_start=start,
                             seq_stop=stop,
                             strand=strand,
-                            retmode='gbwithparts')
+                            rettype = 'gbwithparts',
+                            retmode= 'text')
+    if not handle:
+        print accession
+        return
+
     record = SeqIO.read(handle, 'genbank')
 
     return  record
@@ -103,7 +108,8 @@ def  efetch_protein(acc, start=None, stop=None, strand=None):
                         seq_start=start,
                         seq_stop=stop,
                         strand=strand,
-                        retmode='gbwithparts')
+                        rettype = 'gp',
+                        retmode= 'text')
     record = SeqIO.read(handle, 'genbank')
 
     return  record
