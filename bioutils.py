@@ -58,15 +58,39 @@ def regex_from_string(seq):
 
 def regex_to_string(seq):
     '''Makes an IUPAC DNA sequence string into a regular expression'''
-    bases = { 'A' : 'A', 'T': 'T', 'G': 'G', 'C': 'C',
-	      'R' : '[AG]', 'Y': '[CT]', 'S': '[GC]',
-	      'W' : '[AT]', 'K': '[GT]', 'M': '[AC]',
-	      'B': '[CGT]', 'D': '[AGT]', 'H': '[ACT]',
-	      'V': '[ACG]', 'N': '[AGCT]'}
+    bases = {'A': 'A',
+             'AC': 'M',
+             'ACG': 'V',
+             'ACGT': 'N',
+             'ACT': 'H',
+             'AG': 'R',
+             'AGT': 'D',
+             'AT': 'W',
+             'C': 'C',
+             'CG': 'S',
+             'CGT': 'B',
+             'CT': 'Y',
+             'G': 'G',
+             'GT': 'K',
+             'T': 'T'}
     seq = seq.upper()
 
-    for match in matches:
-        ''.join(sorted(match)[:-2])
+    newseq = []
+    regex  = []
+    collect = False
 
+    for base in list(seq):
+        if base == '[':
+            collect = True
+            continue
+        if base == ']':
+            collect = False
+            newseq.append(bases[''.join(sorted(regex))])
+            regex = []
+            continue
+        if collect == True:
+            regex.append(base)
+            continue
+        newseq .append(base)
 
-    return ''.join([ bases[character] for character in seq ])
+    return ''.join(newseq)
